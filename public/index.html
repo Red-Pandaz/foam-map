@@ -8,11 +8,42 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
 <script src="./scripts/app.js"></script>
 <link rel="stylesheet" type="text/css" href="./styles/style.css">
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
 </head>
+
+<style>
+
+</style>
 <body>
+<div id="loading-page">
+    <div class="d-6"></div>
+</div>
 <div id="map"></div>
+<nav>
+    <div id="left-nav" class="navbar">
+        <span>Follow @fobot on Farcaster</span>
+        <span>Foamstats Home</span>
+        <span>Foamstats Token</span>
+
+    </div>
+
+    <div id ="right-nav" class="navbar">
+        <span>Created by Red Panda</span>
+        <span>Farcaster</span>
+        <span>Dune</span>
+        <span>Github</span>
+        <span>Email</span>
+    </div>
+
+</nav>
+<style>
+    span{
+        color: rgb(12, 9, 9);
+        background-color: rgb(156, 151, 151);
+        display: inline
+    }
+    #contacts{
+        text-align: right;
+    }
+</style>
+
 </body>

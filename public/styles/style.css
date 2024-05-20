@@ -1,59 +1,169 @@
-
-.collapsible {
-    background-color: #2f2c2c;
-    color: rgb(232, 225, 225);
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-  } 
-  
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active, .collapsible:hover, button.mapboxgl-popup-close-button:hover {
-    background-color: #625959;
-  }
-
-  /* Style the collapsible content. Note: hidden by default */
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #2f2c2c;
-    color: rgb(232, 225, 225);
-  }
-  
-  ul{
-    max-width: 650px;
-  }
-
-  li{
-    max-height: 300px;
-    
-  }
-  a{
-    color: rgb(232, 225, 225);
-  }
-  div.mapboxgl-popup-content{
-    border: 1px solid rgb(232, 225, 225)
-  }
-
-  #map > div.mapboxgl-popup.mapboxgl-popup-anchor-top-right, #map > div.mapboxgl-popup.mapboxgl-popup-anchor-top-right, div.mapboxgl-popup-content, div.mapboxgl-popup-tip{
-    background-color: #2f2c2c;
-    color: rgb(232, 225, 225);
-    max-width: 650px;
-  }
-button.mapboxgl-popup-close-button{
-  background-color: rgb(232, 225, 225) ;
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
 }
 
 #map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100vh;
 }
+
+.collapsible {
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+}
+
+ul {
+  max-width: 650px;
+}
+
+li {
+  max-height: 300px;
+}
+
+a {
+  color: rgb(232, 225, 225);
+}
+
+span{
+  color: white;
+  display: table;
+  position: relative;
+  margin: 0px auto;
+  word-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: center;
+  color: #222;
+  background: #fff;
+}
+
+/* Navigation Styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar span {
+  color: rgb(232, 225, 225);
+  background-color: #2f2c2c;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: center;
+  margin: 5px;
+}
+
+/* Mapbox Styles */
 .mapboxgl-popup-content {
-  max-height: 500px; /* Adjust height as needed */
+  border: 1px solid rgb(232, 225, 225);
+  max-height: 500px; /* Adjust as needed */
   overflow-y: auto;
+}
+
+div.mapboxgl-popup.mapboxgl-popup-anchor-top-right,
+div.mapboxgl-popup-content,
+div.mapboxgl-popup-tip {
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+  max-width: 650px;
+}
+
+button.mapboxgl-popup-close-button {
+  background-color: rgb(232, 225, 225);
+}
+
+/* Hover & Active Styles */
+.collapsible:hover,
+.active,
+.navbar span:hover,
+button.mapboxgl-popup-close-button:hover {
+  background-color: #625959;
+  opacity: 0.75;
+}
+
+/* Removed and Overridden Styles */
+#left-nav,
+#right-nav {
+  text-align: unset; /* Inherited from parent */
+}
+
+span { /* This rule is overridden by the more specific .navbar span rule */
+  color: white;
+  display: inline;
+  /* Other styles removed for brevity */
+}
+
+#contacts { /* This style can potentially be moved to a separate stylesheet */
+  text-align: right;
+}
+
+.d-6 {
+  --s: 20px;
+  
+  --_d: calc(0.353*var(--s));
+  width: calc(var(--s) + var(--_d));
+  aspect-ratio: 1;
+  display: grid;
+}
+.d-6:before,
+.d-6:after {
+  content: "";
+  grid-area: 1/1;
+  clip-path: polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
+  background:
+    conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
+     #fff 135deg,#666 0 270deg,#aaa 0);
+  animation: d6 2s infinite;
+}
+.d-6:after {
+  animation-delay:-1s;
+}
+@keyframes d6{
+  0%  {transform:translate(0,0)}
+  25% {transform:translate(30px,0)}
+  50% {transform:translate(30px,30px)}
+  75% {transform:translate(0,30px)}
+  100%{transform:translate(0,0)}
+}
+
+#loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Center content vertically and horizontally */
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(36, 31, 31); /* Semi-transparent background */
+  z-index: 999; /* Ensure loading page is displayed on top of other elements */
 }

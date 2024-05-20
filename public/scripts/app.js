@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 'icon-allow-overlap': true // Allow overlapping markers
                             }
                         });
-
+                        const loadingPage = document.getElementById('loading-page');
+                        loadingPage.style.display = 'none';
                         const [coordinates, tx] = getCoordinatesFromUrl();
                         if (coordinates) {
                             map.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 15 });

@@ -19,12 +19,13 @@ async function startServer() {
                 'img-src': ["'self'", 'data:', 'blob:'], // Allow data URLs and blob URLs for images
                 'script-src': ["'self'", "https://api.mapbox.com"],
                 'connect-src': [
+                    "https://optimism.io",
                     "https://*.tiles.mapbox.com",
                     "https://api.mapbox.com",
                     "https://events.mapbox.com",
                     "https://static.optimism.io",
-                    "http://localhost/api/markers",
-                    "http://localhost/token"
+                    "http://localhost:3000/token",
+                    "http://localhost:3000/api/markers",
                 ], // Allow connections to specified domains
                 // Add other directives as needed
             },
