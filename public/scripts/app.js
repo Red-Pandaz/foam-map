@@ -65,17 +65,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         map.on('load', function () {
             fetch('https://static.optimism.io/data/FOAM/logo.svg')
-                .then(response => response.blob()) // Get the image as a blob
+                .then(response => response.blob())
                 .then(blob => {
                     const image = new Image();
-                    image.src = URL.createObjectURL(blob); // Create a temporary URL for the image
+                    image.src = URL.createObjectURL(blob);
                     image.onload = () => {
                         map.addImage('FOAM-marker', image);
                         map.addSource('markers', {
                             type: 'geojson',
                             data: {
                                 type: 'FeatureCollection',
-                                features: geoJsonFeatures // Assuming you have your GeoJSON features here
+                                features: geoJsonFeatures
                             }
                         });
                         map.addLayer({
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             type: 'symbol',
                             source: 'markers',
                             layout: {
-                                'icon-image': 'FOAM-marker', // Assuming you have an icon named 'marker'
+                                'icon-image': 'FOAM-marker',
                                 'icon-size': [
                                     'interpolate',
                                     ['linear'],
@@ -93,29 +93,35 @@ document.addEventListener('DOMContentLoaded', async function () {
                                     5, .04,
                                     10, .05
                                 ],
-                                'icon-allow-overlap': true // Allow overlapping markers
+                                'icon-allow-overlap': true
                             }
                         });
                         const loadingPage = document.getElementById('loading-page');
                         loadingPage.style.display = 'none';
                         const [coordinates, tx] = getCoordinatesFromUrl();
                         if (coordinates) {
-                            map.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 15 });
-
-                            // Find the marker and show its popup
+                            const offset = [0, -window.innerHeight / 3];
+                            map.flyTo({
+                                center: [coordinates.lng, coordinates.lat],
+                                zoom: 15,
+                                offset: offset,
+                            });
+    
                             geoJsonFeatures.forEach(feature => {
                                 const [lng, lat] = feature.geometry.coordinates;
                                 if (lng === coordinates.lng && lat === coordinates.lat) {
                                     const popupContent = getPopupContent(feature);
-                                    const popup = new mapboxgl.Popup({ offset: 25, maxWidth: 200 })
+                                    const popup = new mapboxgl.Popup({
+                                        offset: 25,
+                                        maxWidth: '90vw',
+                                        anchor: 'top'
+                                    })
                                         .setHTML(popupContent)
                                         .setLngLat([lng, lat])
                                         .addTo(map);
-
-                                    // Attach collapsible event listeners after the popup is rendered
+    
                                     attachCollapsibleEventListeners();
-
-                                    // Wait a moment to ensure the DOM is updated
+    
                                     setTimeout(() => {
                                         const selectTx = document.querySelector(`#${tx}`);
                                         if (selectTx) {
@@ -123,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                         } else {
                                             console.error(`Element with ID ${tx} not found`);
                                         }
-                                    }, 100); // Adjust timeout if needed
+                                    }, 100);
                                 }
                             });
                         }
@@ -131,26 +137,26 @@ document.addEventListener('DOMContentLoaded', async function () {
                 })
                 .catch(error => {
                     console.error('Error fetching image:', error);
-                    // Handle potential errors during image loading (optional)
                 });
-
+    
             map.on('click', 'markers', function (e) {
                 const features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
                 if (features.length) {
                     const feature = features[0];
                     const popupContent = getPopupContent(feature);
-                    const popup = new mapboxgl.Popup({ offset: 25, maxWidth: 200 })
+                    const popup = new mapboxgl.Popup({
+                        offset: 25,
+                        maxWidth: '90vw',
+                        anchor: 'top'
+                    })
                         .setHTML(popupContent)
                         .setLngLat(e.lngLat)
                         .addTo(map);
-
-                    // Attach collapsible event listeners after the popup is rendered
+    
                     attachCollapsibleEventListeners();
-
-
                 }
             });
-        });
+        });    
 
     } catch (error) {
         console.error('Error fetching marker data:', error);
@@ -210,7 +216,7 @@ function getPopupContent(feature) {
                     <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}">${claim.transactionHash}</a></li>
                     <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}">${claim.minter}</a></li>
                   <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
-                    <li>Localization Grade: ${claim.localizationGrade}  (Number of Distinct Anchors: ${claim.distinctAnchors})</li>
+                    <li>Localization Grade: ${claim.localizationGrade}  (Distinct Anchors: ${claim.distinctAnchors})</li>
                 </ul>`;
         } else {
             claimString = `<button type="button" class="collapsible">${parsedTimestamp}</button>`;

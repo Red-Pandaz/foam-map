@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   margin: 0;
-  padding: 0;
+  padding-top: 0 /* Adjust this value as needed to make space for the navigation */
 }
 
 #map {
@@ -32,8 +32,8 @@ body {
   color: rgb(232, 225, 225);
 }
 
-ul {
-  max-width: 650px;
+ul, .mapboxgl-popup-content {
+  max-width: 700px;
 }
 
 li {
@@ -44,11 +44,10 @@ a {
   color: rgb(232, 225, 225);
 }
 
-span{
+.left-nav > li, .right-nav > li {
   color: white;
-  display: table;
-  position: relative;
-  margin: 0px auto;
+  display: block;
+  margin: 0 auto;
   word-wrap: anywhere;
   white-space: pre-wrap;
   padding: 10px;
@@ -56,31 +55,75 @@ span{
   border-radius: 3px;
   font-size: 12px;
   text-align: center;
-  color: #222;
-  background: #fff;
+  background: #2d2424;
 }
 
 /* Navigation Styles */
 nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.navbar {
+  z-index: 10; /* Ensure the navigation is above the map */
+  position: fixed;
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
+  width: 100vw;
+  background-color: #2f2c2c; /* Add a background color to make it visible */
 }
 
-.navbar span {
-  color: rgb(232, 225, 225);
-  background-color: #2f2c2c;
-  padding: 10px;
-  border-radius: 3px;
-  font-size: 12px;
-  text-align: center;
-  margin: 5px;
+.left-nav, .right-nav {
+  display: flex;
+  flex-direction: column;
+  margin: 0
 }
+
+/* Flex direction changes for larger screens */
+@media (min-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw
+  }
+  .left-nav{
+    display: flex;
+    align-items: flex-start;
+    padding: 0
+  }
+  .right-nav{
+    display: flex;
+    align-items: flex-end;
+
+  }
+
+  .left-nav, .right-nav {
+    flex-direction: row;
+  }
+
+  .left-nav > li, .right-nav > li {
+    margin: 0; /* Add some spacing between items */
+  }
+}
+@media (max-width: 767px) {
+  .mapboxgl-popup-content {
+  width: 100%;
+  max-width: 100%; /* Ensure the popup takes the full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  word-wrap: break-word; /* Ensure text wraps correctly */
+  overflow-wrap: break-word; /* Ensure text wraps within words */
+}
+ ul {
+      width: 100%; /* Take up full width of the screen */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  .left-nav .right-nav{
+    max-width: 25%
+  }
+  nav{
+    justify-content: space-between
+  }
+}
+
+
 
 /* Mapbox Styles */
 .mapboxgl-popup-content {
@@ -89,46 +132,43 @@ nav {
   overflow-y: auto;
 }
 
+/* Background colors for different parts of the popup */
 div.mapboxgl-popup.mapboxgl-popup-anchor-top-right,
 div.mapboxgl-popup-content,
 div.mapboxgl-popup-tip {
   background-color: #2f2c2c;
   color: rgb(232, 225, 225);
-  max-width: 650px;
 }
 
 button.mapboxgl-popup-close-button {
   background-color: rgb(232, 225, 225);
 }
 
+
 /* Hover & Active Styles */
 .collapsible:hover,
 .active,
-.navbar span:hover,
 button.mapboxgl-popup-close-button:hover {
   background-color: #625959;
   opacity: 0.75;
 }
 
-/* Removed and Overridden Styles */
-#left-nav,
-#right-nav {
-  text-align: unset; /* Inherited from parent */
-}
-
-span { /* This rule is overridden by the more specific .navbar span rule */
-  color: white;
-  display: inline;
-  /* Other styles removed for brevity */
-}
-
-#contacts { /* This style can potentially be moved to a separate stylesheet */
-  text-align: right;
+/* Loading Page Styles */
+#loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(36, 31, 31);
+  z-index: 999;
 }
 
 .d-6 {
   --s: 20px;
-  
   --_d: calc(0.353*var(--s));
   width: calc(var(--s) + var(--_d));
   aspect-ratio: 1;
@@ -147,23 +187,10 @@ span { /* This rule is overridden by the more specific .navbar span rule */
 .d-6:after {
   animation-delay:-1s;
 }
-@keyframes d6{
+@keyframes d6 {
   0%  {transform:translate(0,0)}
   25% {transform:translate(30px,0)}
   50% {transform:translate(30px,30px)}
   75% {transform:translate(0,30px)}
   100%{transform:translate(0,0)}
-}
-
-#loading-page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex; /* Center content vertically and horizontally */
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(36, 31, 31); /* Semi-transparent background */
-  z-index: 999; /* Ensure loading page is displayed on top of other elements */
 }
