@@ -1,0 +1,21 @@
+{
+  "name": "foam-map",
+  "version": "1.0.0",
+  "description": "A Mapbox-based map of FOAM presence claims",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Red-Pandaz/foam-map.git"
+  },
+  "author": "Red Panda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Red-Pandaz/foam-map/issues"
+  },
+  "homepage": "https://github.com/Red-Pandaz/foam-map#readme"
+}
