@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   margin: 0;
-  padding-top: 0 /* Adjust this value as needed to make space for the navigation */
+  padding-top: 0 
 }
 
 #map {
@@ -55,7 +55,6 @@ a {
   border-radius: 3px;
   font-size: 12px;
   text-align: center;
-  background: #2d2424;
 }
 
 /* Navigation Styles */
@@ -67,10 +66,12 @@ nav {
   justify-content: start;
   align-items: center;
   width: 100vw;
-  background-color: #2f2c2c; /* Add a background color to make it visible */
 }
 
+
 .left-nav, .right-nav {
+  background-color: #2f2c2c; /* Add a background color to make it visible */
+  opacity: .85;
   display: flex;
   flex-direction: column;
   margin: 0
@@ -78,6 +79,20 @@ nav {
 
 /* Flex direction changes for larger screens */
 @media (min-width: 768px) {
+  ul.right-nav{
+    padding-left: 5px;
+  }
+  .collapsible{
+    max-width: 450px;
+    width: fit-content;  /* Element width adjusts to visible content */
+    overflow: hidden;  /* Hide any overflowing content */
+    display: flex;
+    flex-direction: column
+  }
+  
+  .collapsible:active{
+    overflow: visible; 
+  }
   nav {
     flex-direction: row;
     justify-content: space-between;
@@ -100,27 +115,40 @@ nav {
   }
 
   .left-nav > li, .right-nav > li {
-    margin: 0; /* Add some spacing between items */
+    margin: 0; 
   }
 }
+
+
 @media (max-width: 767px) {
   .mapboxgl-popup-content {
   width: 100%;
-  max-width: 100%; /* Ensure the popup takes the full width */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  word-wrap: break-word; /* Ensure text wraps correctly */
-  overflow-wrap: break-word; /* Ensure text wraps within words */
+  max-width: 100%
+  box-sizing: border-box; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
 }
+
  ul {
-      width: 100%; /* Take up full width of the screen */
-      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+      width: 100%; 
+      box-sizing: border-box; 
   }
-  .left-nav .right-nav{
-    max-width: 25%
+  .left-nav, .right-nav{
+    max-width: 25%;
+    padding: 0;
+    margin-top: 0;
+    pointer-events: auto;
   }
+
   nav{
-    justify-content: space-between
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: row;
+    pointer-events: none
+
   }
+
 }
 
 
@@ -128,7 +156,7 @@ nav {
 /* Mapbox Styles */
 .mapboxgl-popup-content {
   border: 1px solid rgb(232, 225, 225);
-  max-height: 500px; /* Adjust as needed */
+  max-height: 500px; 
   overflow-y: auto;
 }
 
@@ -152,6 +180,8 @@ button.mapboxgl-popup-close-button:hover {
   background-color: #625959;
   opacity: 0.75;
 }
+
+
 
 /* Loading Page Styles */
 #loading-page {

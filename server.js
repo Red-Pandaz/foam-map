@@ -26,6 +26,8 @@ async function startServer() {
                     "https://static.optimism.io",
                     "http://localhost:3000/token",
                     "http://localhost:3000/api/markers",
+                    "http://localhost:*", // Allow all localhost ports for HTTP
+                    "https://localhost:*", // Allow all localhost ports for HTTPS
                 ], // Allow connections to specified domains
                 // Add other directives as needed
             },

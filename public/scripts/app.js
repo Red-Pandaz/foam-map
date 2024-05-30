@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 bytes20Location: data.bytes20Location,
                 geoHashLocation: data.geoHashLocation,
                 latitude: data.latlonLocation.latitude,
-                longitude: data.latlonLocation.longitude
+                longitude: data.latlonLocation.longitude,
+                altitude: data.altitude
             });
         });
 
@@ -100,6 +101,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         loadingPage.style.display = 'none';
                         const [coordinates, tx] = getCoordinatesFromUrl();
                         if (coordinates) {
+                            
                             const offset = [0, -window.innerHeight / 3];
                             map.flyTo({
                                 center: [coordinates.lng, coordinates.lat],
@@ -126,6 +128,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                         const selectTx = document.querySelector(`#${tx}`);
                                         if (selectTx) {
                                             selectTx.style.display = 'block';
+                                            selectTx.scrollIntoView({ behavior: 'smooth', block: 'center' });                               
                                         } else {
                                             console.error(`Element with ID ${tx} not found`);
                                         }
@@ -217,6 +220,7 @@ function getPopupContent(feature) {
                     <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}">${claim.minter}</a></li>
                   <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Distinct Anchors: ${claim.distinctAnchors})</li>
+                    <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         } else {
             claimString = `<button type="button" class="collapsible">${parsedTimestamp}</button>`;
@@ -227,6 +231,7 @@ function getPopupContent(feature) {
                     <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}">${claim.minter}</a></li>
                     <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Number of Distinct Anchors: ${claim.distinctAnchors})</li>
+                    <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         }
         returnString += claimString;
@@ -244,6 +249,11 @@ function attachCollapsibleEventListeners() {
                 content.style.display = 'none';
             } else {
                 content.style.display = 'block';
+                console.log('block');
+                // Use a small delay to ensure the content is displayed before scrolling
+                setTimeout(() => {
+                    content.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 10); // 10ms delay
             }
         });
     });
