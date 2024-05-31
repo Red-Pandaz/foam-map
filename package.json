@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A Mapbox-based map of FOAM presence claims",
   "main": "server.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -17,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/Red-Pandaz/foam-map/issues"
   },
-  "homepage": "https://github.com/Red-Pandaz/foam-map#readme"
+  "homepage": "https://github.com/Red-Pandaz/foam-map#readme",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^5.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "mongodb": "^6.7.0"
+  }
 }
