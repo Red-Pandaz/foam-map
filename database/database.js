@@ -7,6 +7,7 @@ const claimCollectionName ='Presence Claims'
 let client
 
 async function getClaimCollection() {
+console.log('start')
     const DB_URI = await retryApiCall(() => accessSecret('DB_URI'));
     try {
         if (!client || !client.topology || !client.topology.isConnected()) {
