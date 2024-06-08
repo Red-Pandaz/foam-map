@@ -32,17 +32,9 @@ async function startServer() {
                     "https://api.mapbox.com",
                     "https://events.mapbox.com",
                     "https://static.optimism.io",
-		    "https://dune.com",
-                    "http://www.map.foamcaster.xyz",
-                    "http://map.foamcaster.xyz",
-                    "http://www.token.foamcaster.xyz",
-                    "http://token.foamcaster.xyz",
+		            "https://dune.com",
                     "http://www.foamcaster.xyz",
                     "http://foamcaster.xyz",
-                    "https://www.map.foamcaster.xyz",
-                    "https://map.foamcaster.xyz",
-                    "https://www.token.foamcaster.xyz",
-                    "https://token.foamcaster.xyz",
                     "https://www.foamcaster.xyz",
                     "https://foamcaster.xyz",
                     "http://foamcaster.xyz:3000/token",
@@ -78,16 +70,8 @@ async function startServer() {
 
     // Middleware setup
     const allowedOrigins = [
-        'http://www.map.foamcaster.xyz',
-        'http://map.foamcaster.xyz',
-        'http://www.token.foamcaster.xyz',
-        'http://token.foamcaster.xyz',
         'http://www.foamcaster.xyz',
         'http://foamcaster.xyz',
-        'https://www.map.foamcaster.xyz',
-        'https://map.foamcaster.xyz',
-        'https://www.token.foamcaster.xyz',
-        'https://token.foamcaster.xyz',
         'https://www.foamcaster.xyz',
         'https://foamcaster.xyz'
     ];
@@ -115,13 +99,13 @@ async function startServer() {
     app.use(vhost('foamcaster.xyz', createStaticApp('main')));
     app.use(vhost('www.foamcaster.xyz', createStaticApp('main')));
 
-    // Serve map subdomain
-    app.use(vhost('map.foamcaster.xyz', createStaticApp('map')));
-    app.use(vhost('www.map.foamcaster.xyz', createStaticApp('map')));
+    // // Serve map subdomain
+    // app.use(vhost('map.foamcaster.xyz', createStaticApp('map')));
+    // app.use(vhost('www.map.foamcaster.xyz', createStaticApp('map')));
 
-    // Serve token subdomain
-    app.use(vhost('token.foamcaster.xyz', createStaticApp('token')));
-    app.use(vhost('www.token.foamcaster.xyz', createStaticApp('token')));
+    // // Serve token subdomain
+    // app.use(vhost('token.foamcaster.xyz', createStaticApp('token')));
+    // app.use(vhost('www.token.foamcaster.xyz', createStaticApp('token')));
 
     // Token endpoint
     app.get('/token', (req, res) => {
