@@ -1,0 +1,249 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding-top: 0;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+}
+li > a {
+  text-decoration: underline;
+}
+nav {
+  z-index: 10; /* Ensure the navigation is above the map */
+  position: fixed;
+  width: 100%;
+  background-color: #2f2c2c;
+  opacity: 0.85;
+  display: flex;
+  justify-content: center; /* Center the navigation */
+  align-items: center;
+  padding: 10px;
+  flex-direction: column; /* Stack navigation items vertically */
+}
+
+/* Navigation Styles */
+.right-nav {
+  margin-right: 15px;
+}
+.left-nav, .right-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+}
+
+.left-nav > li, .right-nav > li {
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px; /* Larger font size for visibility */
+}
+
+a {
+  color: rgb(232, 225, 225);
+  text-decoration: none;
+}
+
+/* Hamburger Menu Styles */
+.menu-toggle {
+  display: block; /* Always show the hamburger menu */
+  padding-top: 15px;
+  padding-bottom: 15px;
+  z-index: 15;
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Position the hamburger menu on the right */
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 30px;
+  height: 6px;
+  background-color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.hamburger:before,
+.hamburger:after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 6px;
+  background-color: #fff;
+}
+
+.hamburger:before {
+  top: -12px;
+}
+
+.hamburger:after {
+  bottom: -12px;
+}
+
+.collapsible:hover,
+.collapsible.active,
+button.mapboxgl-popup-close-button:hover {
+  background-color: #625959;
+  opacity: 0.75;
+}
+
+.navigation {
+  display: none; /* Hide the navigation menu by default */
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #2f2c2c;
+}
+
+.navigation.open {
+  display: flex; /* Show the navigation menu when hamburger menu is clicked */
+}
+
+/* Popup Styles */
+.mapboxgl-popup-content {
+  border: 1px solid rgb(232, 225, 225);
+  max-height: 500px;
+  overflow-y: auto;
+  word-wrap: break-word; /* Ensure words wrap to the next line */
+  white-space: normal; /* Allow text to wrap normally */
+  overflow-wrap: break-word; /* Break words at arbitrary points */
+}
+
+div.mapboxgl-popup.mapboxgl-popup-anchor-top-right,
+div.mapboxgl-popup-content,
+div.mapboxgl-popup-tip {
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+}
+
+button.mapboxgl-popup-close-button {
+  background-color: rgb(232, 225, 225);
+}
+
+/* Collapsible Styles */
+.collapsible {
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #2f2c2c;
+  color: rgb(232, 225, 225);
+}
+
+ul, .mapboxgl-popup-content {
+  max-width: 700px;
+}
+
+li {
+  max-height: 300px;
+}
+
+.left-nav > li, .right-nav > li {
+  color: white;
+  display: block;
+  margin: 0 auto;
+  word-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+}
+
+/* Loading Page Styles */
+#loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(36, 31, 31);
+  z-index: 999;
+}
+
+.d-6 {
+  --s: 20px;
+  --_d: calc(0.353*var(--s));
+  width: calc(var(--s) + var(--_d));
+  aspect-ratio: 1;
+  display: grid;
+}
+.d-6:before,
+.d-6:after {
+  content: "";
+  grid-area: 1/1;
+  clip-path: polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
+  background:
+    conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
+     #fff 135deg,#666 0 270deg,#aaa 0);
+  animation: d6 2s infinite;
+}
+.d-6:after {
+  animation-delay:-1s;
+}
+@keyframes d6 {
+  0%  {transform:translate(0,0)}
+  25% {transform:translate(30px,0)}
+  50% {transform:translate(30px,30px)}
+  75% {transform:translate(0,30px)}
+  100%{transform:translate(0,0)}
+}
+
+/* Additional Styles for Responsive Design */
+@media (max-width: 901px) {
+  .collapsible:hover,
+  .active,
+  button.mapboxgl-popup-close-button:hover {
+    background-color: #625959;
+    opacity: 0.75;
+  }
+.collapsible{
+  width: fit-content; /* Element width adjusts to visible content */
+    overflow: hidden; /* Hide any overflowing content */
+    display: flex;
+}
+
+}
+@media (min-width: 902px) {
+  .collapsible:hover,
+  .active,
+  button.mapboxgl-popup-close-button:hover {
+    background-color: #625959;
+    opacity: 0.75;
+  }
+  ul.right-nav {
+    padding-left: 5px;
+  }
+  .collapsible {
+    max-width: 450px;
+    width: fit-content; /* Element width adjusts to visible content */
+    overflow: hidden; /* Hide any overflowing content */
+    display: flex;
+    flex-direction: column;
+  }
+  .collapsible:active {
+    overflow: visible;
+  }
+}
