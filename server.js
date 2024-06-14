@@ -9,7 +9,6 @@ const router = require('./routes/markers.js');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
-const vhost = require('vhost');
 
 async function startServer() {
     const app = express();
@@ -32,7 +31,7 @@ async function startServer() {
                     "https://api.mapbox.com",
                     "https://events.mapbox.com",
                     "https://static.optimism.io",
-		            "https://dune.com",
+                    "https://dune.com",
                     "http://www.foamcaster.xyz",
                     "http://foamcaster.xyz",
                     "https://www.foamcaster.xyz",
@@ -88,24 +87,8 @@ async function startServer() {
         }
     }));
 
-    // Function to create static file serving apps
-    const createStaticApp = (directory) => {
-        const staticApp = express();
-        staticApp.use(express.static(path.join(__dirname, 'public', directory)));
-        return staticApp;
-    };
-
-    // Serve main subdomain
-    app.use(vhost('foamcaster.xyz', createStaticApp('main')));
-    app.use(vhost('www.foamcaster.xyz', createStaticApp('main')));
-
-    // // Serve map subdomain
-    // app.use(vhost('map.foamcaster.xyz', createStaticApp('map')));
-    // app.use(vhost('www.map.foamcaster.xyz', createStaticApp('map')));
-
-    // // Serve token subdomain
-    // app.use(vhost('token.foamcaster.xyz', createStaticApp('token')));
-    // app.use(vhost('www.token.foamcaster.xyz', createStaticApp('token')));
+    // Serve static files from the 'public' directory
+    app.use(express.static(path.join(__dirname, 'public')));
 
     // Token endpoint
     app.get('/token', (req, res) => {

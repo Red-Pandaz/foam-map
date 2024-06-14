@@ -8,23 +8,23 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 li > a {
   text-decoration: underline;
 }
 nav {
-  z-index: 10; /* Ensure the navigation is above the map */
+  z-index: 10;
   position: fixed;
   width: 100%;
   background-color: #2f2c2c;
   opacity: 0.85;
   display: flex;
-  justify-content: center; /* Center the navigation */
+  justify-content: center;
   align-items: center;
   padding: 10px;
-  flex-direction: column; /* Stack navigation items vertically */
+  flex-direction: column; 
 }
 
 /* Navigation Styles */
@@ -35,7 +35,7 @@ nav {
   display: flex;
   list-style: none;
   padding: 0;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column; 
   align-items: center;
 }
 
@@ -43,7 +43,7 @@ nav {
   color: white;
   padding: 10px;
   text-align: center;
-  font-size: 18px; /* Larger font size for visibility */
+  font-size: 18px; 
 }
 
 a {
@@ -53,13 +53,13 @@ a {
 
 /* Hamburger Menu Styles */
 .menu-toggle {
-  display: block; /* Always show the hamburger menu */
+  display: block; 
   padding-top: 15px;
   padding-bottom: 15px;
   z-index: 15;
-  position: absolute;
+  position: fixed;
   top: 20px;
-  right: 20px; /* Position the hamburger menu on the right */
+  right: 20px; 
   cursor: pointer;
 }
 
@@ -67,7 +67,6 @@ a {
   width: 30px;
   height: 6px;
   background-color: #fff;
-  position: relative;
   cursor: pointer;
 }
 
@@ -77,15 +76,16 @@ a {
   position: absolute;
   width: 30px;
   height: 6px;
+
   background-color: #fff;
 }
 
 .hamburger:before {
-  top: -12px;
+  top: 3px;
 }
 
 .hamburger:after {
-  bottom: -12px;
+  bottom: 3px;
 }
 
 .collapsible:hover,
@@ -96,7 +96,7 @@ button.mapboxgl-popup-close-button:hover {
 }
 
 .navigation {
-  display: none; /* Hide the navigation menu by default */
+  display: none; 
   flex-direction: column;
   align-items: center;
   padding: 30px;
@@ -104,9 +104,8 @@ button.mapboxgl-popup-close-button:hover {
 }
 
 .navigation.open {
-  display: flex; /* Show the navigation menu when hamburger menu is clicked */
+  display: flex; 
 }
-
 /* Popup Styles */
 .mapboxgl-popup-content {
   border: 1px solid rgb(232, 225, 225);
@@ -236,6 +235,10 @@ li {
   ul.right-nav {
     padding-left: 5px;
   }
+
+  /* ul.left-nav{
+    top: 10px;
+  } */
   .collapsible {
     max-width: 450px;
     width: fit-content; /* Element width adjusts to visible content */

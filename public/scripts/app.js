@@ -95,7 +95,8 @@ console.log(response)
                                     0, .03,
                                     2, .045,
                                     5, .06,
-                                    10, .075
+                                    10, .075,
+                                    15, .09,
                                 ],
                                 'icon-allow-overlap': true
                             }
