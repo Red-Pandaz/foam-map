@@ -230,22 +230,22 @@ function getPopupContent(feature) {
             claimString = `<h4>${parsedTimestamp}</h4>
                 <ul id="${claim.transactionHash.substring(1)}">
                     <li>Claim ID: ${claim.id}</li>
-                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer">${claim.transactionHash}</a></li>
-                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
+                    <li>Tx Hash: <a href="https://basescan.org/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer">${claim.transactionHash}</a></li>
+                    <li>Minted By: <a href="https://basescan.org/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                   <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Distinct Anchors: ${claim.distinctAnchors})</li>
-                    <li>Altitude: ${claim.altitude}</li>
+                    // <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         } else {
             claimString = `<button type="button" class="collapsible">${parsedTimestamp}</button>`;
             claimString += `
                 <ul class="content" id="${claim.transactionHash.substring(1)}">
                     <li>Claim ID: ${claim.id}</li>
-                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer">${claim.transactionHash}</a></li>
-                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
+                    <li>Tx Hash: <a href="https://basescan.org/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer">${claim.transactionHash}</a></li>
+                    <li>Minted By: <a href="https://basescan.org/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                     <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Number of Distinct Anchors: ${claim.distinctAnchors})</li>
-                    <li>Altitude: ${claim.altitude}</li>
+                    // <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         }
         returnString += claimString;

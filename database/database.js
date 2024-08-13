@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const dotenv = require("dotenv").config();
 const { retryApiCall, accessSecret } = require('../utils/apiutils.js');
 const dbName = 'Foamcaster-V2'
-const claimCollectionName ='Presence Claims'
+const claimCollectionName ='Base Presence Claims'
 // const DB_URI = await retryApiCall(() => accessSecret('DB_URI'));
 let client
 
