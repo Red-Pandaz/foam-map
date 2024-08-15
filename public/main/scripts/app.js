@@ -66,7 +66,8 @@ console.log(response)
         });
 
         map.on('load', function () {
-            fetch('https://static.optimism.io/data/FOAM/logo.svg')
+            fetch('images/foamlogo.svg')
+            // fetch('https://static.optimism.io/data/FOAM/logo.svg')
                 .then(response => response.blob())
                 .then(blob => {
                     const image = new Image();
@@ -90,10 +91,10 @@ console.log(response)
                                     'interpolate',
                                     ['linear'],
                                     ['coalesce', ['get', 'number']],
-                                    0, .02,
-                                    2, .030,
-                                    5, .04,
-                                    10, .05
+                                    0, .03,
+                                    2, .045,
+                                    5, .06,
+                                    10, .075
                                 ],
                                 'icon-allow-overlap': true
                             }
@@ -217,8 +218,8 @@ function getPopupContent(feature) {
             claimString = `<h4>${parsedTimestamp}</h4>
                 <ul id="${claim.transactionHash.substring(1)}">
                     <li>Claim ID: ${claim.id}</li>
-                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}">${claim.transactionHash}</a></li>
-                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}">${claim.minter}</a></li>
+                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer">${claim.transactionHash}</a></li>
+                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                   <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Distinct Anchors: ${claim.distinctAnchors})</li>
                     <li>Altitude: ${claim.altitude}</li>
@@ -228,8 +229,8 @@ function getPopupContent(feature) {
             claimString += `
                 <ul class="content" id="${claim.transactionHash.substring(1)}">
                     <li>Claim ID: ${claim.id}</li>
-                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}">${claim.transactionHash}</a></li>
-                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}">${claim.minter}</a></li>
+                    <li>Tx Hash: <a href="https://devnet-l2.foam.space/tx/${claim.transactionHash}" target="_blank" rel="noopener noreferrer"${claim.transactionHash}</a></li>
+                    <li>Minted By: <a href="https://devnet-l2.foam.space/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                     <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Number of Distinct Anchors: ${claim.distinctAnchors})</li>
                     <li>Altitude: ${claim.altitude}</li>
