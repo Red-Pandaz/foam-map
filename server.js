@@ -80,6 +80,7 @@ async function startServer() {
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.get('/token', (req, res) => {
+        console.log('Received request for /token');
         res.json({ token: mapboxToken });
     });
 

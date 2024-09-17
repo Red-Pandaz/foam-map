@@ -45,7 +45,6 @@ console.log(response)
         // Extract the values (grouped markers) from the object
         let geoJsonFeatures = Object.values(groupedMarkers);
         geoJsonFeatures.forEach(function (geoJsonFeature) {
-            console.log(geoJsonFeature)
             geoJsonFeature.properties.number = geoJsonFeature.properties.claims.length;
         });
 
@@ -54,6 +53,7 @@ console.log(response)
             throw new Error('Failed to fetch Mapbox token');
         }
         const data = await tokenResponse.json();
+        console.log(data)
         const mapboxToken = data.token;
         // Use the token with Mapbox GL JS
         mapboxgl.accessToken = mapboxToken;
