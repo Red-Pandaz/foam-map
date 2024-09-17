@@ -91,33 +91,31 @@ async function startServer() {
     });
 
     const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
+
+    // Start the server and assign it to a variable
+    const server = app.listen(PORT, () => {
         console.log(`Node.js server is running on http://localhost:${PORT}`);
+    });
+
+    // Handle process termination and cleanup
+    process.on('SIGINT', async () => {
+        console.log('Received SIGINT. Closing MongoDB connection...');
+        await closeConnection();
+        server.close(() => {
+            console.log('Server closed');
+            process.exit(0);
+        });
+    });
+
+    process.on('SIGTERM', async () => {
+        console.log('Received SIGTERM. Closing MongoDB connection...');
+        await closeConnection();
+        server.close(() => {
+            console.log('Server closed');
+            process.exit(0);
+        });
     });
 }
 
-const server = app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
-
-// Handle process termination and cleanup
-process.on('SIGINT', async () => {
-    console.log('Received SIGINT. Closing MongoDB connection...');
-    await closeConnection();
-    server.close(() => {
-        console.log('Server closed');
-        process.exit(0);
-    });
-});
-
-process.on('SIGTERM', async () => {
-    console.log('Received SIGTERM. Closing MongoDB connection...');
-    await closeConnection();
-    server.close(() => {
-        console.log('Server closed');
-        process.exit(0);
-    });
-});
-
+// Call the function to start the server
 startServer();
