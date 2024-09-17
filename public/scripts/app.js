@@ -8,14 +8,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 console.log(response)
             throw new Error('Failed to fetch marker data');
         }
-
         const markers = await response.json();
-        console.log(markers)
         const groupedMarkers = {};
-        markers.forEach(data => {
-           
+        markers.forEach(data => {    
             const key = data.geoHashLocation; // Use geoHashLocation as the key
-            console.log(key)
             if (!groupedMarkers[key]) {
                 // If the key doesn't exist, create a new entry with an empty array
                 groupedMarkers[key] = {
@@ -49,6 +45,7 @@ console.log(response)
         // Extract the values (grouped markers) from the object
         let geoJsonFeatures = Object.values(groupedMarkers);
         geoJsonFeatures.forEach(function (geoJsonFeature) {
+            console.log(geoJsonFeature)
             geoJsonFeature.properties.number = geoJsonFeature.properties.claims.length;
         });
 
