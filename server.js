@@ -10,6 +10,7 @@ const router = require('./routes/markers.js');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
+const jwt = require('jsonwebtoken')
 
 async function startServer() {
     const app = express();
@@ -50,6 +51,15 @@ async function startServer() {
     app.use('/', limiterForRootEndpoint);
     app.set('trust proxy', 1);
 
+    let jwtSecretToken;
+
+    try{
+        jwtSecretToken = await retryApiCall(() => accessSecret('JWT_SECRET'))
+    } catch (error) {
+        console.error('Failed to access JWT secret token:', error);
+        process.exit(1); // Exit process if the token cannot be retrieved
+    }
+
     let mapboxToken;
     try {
         mapboxToken = await retryApiCall(() => accessSecret('MAPBOX_API'));
@@ -80,8 +90,19 @@ async function startServer() {
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.get('/token', (req, res) => {
-        console.log('Received request for /token');
-        res.json({ token: mapboxToken });
+        const authHeader = req.headers['authorization'];
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(403).send('Forbidden');
+        }
+        
+        const token = authHeader.split(' ')[1];
+        
+        jwt.verify(token, jwtSecretToken, (err) => {
+            if (err) {
+                return res.status(403).send('Forbidden');
+            }
+            res.json({ token: mapboxToken });
+        });
     });
 
     app.use('/api', router);
