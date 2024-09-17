@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    // try {
+    try {
 
         const response = await fetch('/api/markers', {
             credentials: 'include'
         });
         if (!response.ok) {
-console.log(response)
+            console.log(response)
             throw new Error('Failed to fetch marker data');
         }
         const markers = await response.json();
@@ -53,7 +53,6 @@ console.log(response)
             throw new Error('Failed to fetch Mapbox token');
         }
         const data = await tokenResponse.json();
-        console.log(data)
         const mapboxToken = data.token;
         // Use the token with Mapbox GL JS
         mapboxgl.accessToken = mapboxToken;
@@ -176,11 +175,11 @@ console.log(response)
             });
         });    
 
-    // } catch (error) {
-        // console.error('Error fetching marker data:', error);
-        // console.trace();
+    } catch (error) {
+        console.error('Error fetching marker data:', error);
+        console.trace();
         // Handle error
-    // }
+    }
 });
 
 function countUniqueGeoHashLocations(data) {

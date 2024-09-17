@@ -53,7 +53,6 @@ async function startServer() {
     let mapboxToken;
     try {
         mapboxToken = await retryApiCall(() => accessSecret('MAPBOX_API'));
-        console.log(mapboxToken)
     } catch (error) {
         console.error('Failed to access Mapbox token:', error);
         process.exit(1); // Exit process if the token cannot be retrieved
