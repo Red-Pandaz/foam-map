@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const { retryApiCall, accessSecret } = require('./utils/apiutils.js');
+const { closeConnection } = require('./database'); // Import closeConnection function
 const router = require('./routes/markers.js');
 const fs = require('fs');
 const https = require('https');
@@ -94,5 +95,24 @@ async function startServer() {
         console.log(`Node.js server is running on http://localhost:${PORT}`);
     });
 }
+
+// Handle process termination and cleanup
+process.on('SIGINT', async () => {
+    console.log('Received SIGINT. Closing MongoDB connection...');
+    await closeConnection();
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
+
+process.on('SIGTERM', async () => {
+    console.log('Received SIGTERM. Closing MongoDB connection...');
+    await closeConnection();
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
 
 startServer();

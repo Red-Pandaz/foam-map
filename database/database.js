@@ -1,34 +1,45 @@
 const { MongoClient } = require('mongodb');
-const dotenv = require("dotenv").config();
+const dotenv = require('dotenv').config();
 const { retryApiCall, accessSecret } = require('../utils/apiutils.js');
-const dbName = 'Foamcaster-V2'
-const claimCollectionName ='Base Presence Claims'
-// const DB_URI = await retryApiCall(() => accessSecret('DB_URI'));
-let client
+const dbName = 'Foamcaster-V2';
+const claimCollectionName = 'Base Presence Claims';
 
+let client;
+let isConnected = false;
+
+// Function to connect to MongoDB
+async function connectToDatabase() {
+    if (!client || !isConnected) {
+        const DB_URI = await retryApiCall(() => accessSecret('DB_URI'));
+        client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+        isConnected = true;
+        console.log('Connected to the database');
+    }
+    return client;
+}
+
+// Function to get claims collection
 async function getClaimCollection() {
-console.log('start')
-    const DB_URI = await retryApiCall(() => accessSecret('DB_URI'));
     try {
-        if (!client || !client.topology || !client.topology.isConnected()) {
-            client = new MongoClient(DB_URI);
-            await retryApiCall(() => client.connect());
-            console.log("Connected to the database");
-        }
+        const client = await connectToDatabase();  // Ensure connection
         const db = client.db(dbName);
         const collection = db.collection(claimCollectionName);
         const documents = await retryApiCall(() => collection.find({}).toArray());
-        return documents
+        return documents;
     } catch (error) {
         console.error('Error fetching claims:', error);
-        throw error; // Rethrow the error to be caught by the caller
-    } finally {
-        // Close the connection
-        if (client && client.topology && client.topology.isConnected()) {
-            await retryApiCall(() => client.close());
-            console.log("Connection closed");
-        }
+        throw error;  // Rethrow the error to be caught by the caller
     }
 }
 
-module.exports = { getClaimCollection }
+// Optional: Function to close the connection when needed
+async function closeConnection() {
+    if (client && isConnected) {
+        await client.close();
+        isConnected = false;
+        console.log('Connection closed');
+    }
+}
+
+module.exports = { getClaimCollection, closeConnection };
