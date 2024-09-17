@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    try {
+    // try {
 
         const response = await fetch('/api/markers', {
             credentials: 'include'
@@ -176,11 +176,11 @@ console.log(response)
             });
         });    
 
-    } catch (error) {
-        console.error('Error fetching marker data:', error);
-        console.trace();
+    // } catch (error) {
+        // console.error('Error fetching marker data:', error);
+        // console.trace();
         // Handle error
-    }
+    // }
 });
 
 function countUniqueGeoHashLocations(data) {
