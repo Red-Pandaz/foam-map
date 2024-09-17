@@ -235,7 +235,6 @@ function getPopupContent(feature) {
                     <li>Minted By: <a href="https://basescan.org/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                   <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Distinct Anchors: ${claim.distinctAnchors})</li>
-                    // <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         } else {
             claimString = `<button type="button" class="collapsible">${parsedTimestamp}</button>`;
@@ -246,7 +245,6 @@ function getPopupContent(feature) {
                     <li>Minted By: <a href="https://basescan.org/address/${claim.minter}" target="_blank" rel="noopener noreferrer">${claim.minter}</a></li>
                     <li>Zone Number: ${claim.zone}  (Zone Name: ${claim.zoneName})</li>
                     <li>Localization Grade: ${claim.localizationGrade}  (Number of Distinct Anchors: ${claim.distinctAnchors})</li>
-                    // <li>Altitude: ${claim.altitude}</li>
                 </ul>`;
         }
         returnString += claimString;
