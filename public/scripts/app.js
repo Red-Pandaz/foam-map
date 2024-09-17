@@ -13,6 +13,7 @@ console.log(response)
         console.log(markers)
         const groupedMarkers = {};
         markers.forEach(data => {
+            console.log(key)
             const key = data.geoHashLocation; // Use geoHashLocation as the key
             if (!groupedMarkers[key]) {
                 // If the key doesn't exist, create a new entry with an empty array
@@ -68,6 +69,7 @@ console.log(response)
         });
 
         map.on('load', function () {
+            console.log('map loading')
             fetch('images/foamlogo.svg')
             // fetch('https://static.optimism.io/data/FOAM/logo.svg')
                 .then(response => response.blob())
@@ -178,6 +180,7 @@ console.log(response)
 
     } catch (error) {
         console.error('Error fetching marker data:', error);
+        console.trace();
         // Handle error
     }
 });
