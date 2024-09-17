@@ -14,6 +14,7 @@ async function startServer() {
     const app = express();
     app.use(helmet());
 
+    // Content Security Policy
     app.use(
         helmet.contentSecurityPolicy({
             directives: {
@@ -39,7 +40,7 @@ async function startServer() {
         })
     );
 
-
+    // Rate Limiting
     const limiterForRootEndpoint = rateLimit({
         windowMs: 15 * 60 * 1000, // 15 minutes
         max: 100, // Limit each IP to 100 requests per windowMs
@@ -47,7 +48,6 @@ async function startServer() {
     });
     app.use('/', limiterForRootEndpoint);
     app.set('trust proxy', 1);
-
 
     let mapboxToken;
     try {
@@ -76,14 +76,11 @@ async function startServer() {
         }
     }));
 
-
     app.use(express.static(path.join(__dirname, 'public')));
-
 
     app.get('/token', (req, res) => {
         res.json({ token: mapboxToken });
     });
-
 
     app.use('/api', router);
 
@@ -92,20 +89,10 @@ async function startServer() {
         res.status(500).send('Internal Server Error');
     });
 
-
-    const httpsOptions = {
-        key: fs.readFileSync('/etc/letsencrypt/live/foamcaster.xyz/privkey.pem'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/foamcaster.xyz/fullchain.pem'),
-    };
-
-
-    const HTTPS_PORT = process.env.HTTPS_PORT || 8443;
-    const httpsServer = https.createServer(httpsOptions, app);
-    
-    httpsServer.listen(HTTPS_PORT, () => {
-        console.log(`HTTPS server running on port ${HTTPS_PORT}`);
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Node.js server is running on http://localhost:${PORT}`);
     });
 }
-
 
 startServer();
