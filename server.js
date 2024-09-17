@@ -96,6 +96,11 @@ async function startServer() {
     });
 }
 
+const server = app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+
 // Handle process termination and cleanup
 process.on('SIGINT', async () => {
     console.log('Received SIGINT. Closing MongoDB connection...');
