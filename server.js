@@ -50,14 +50,14 @@ async function startServer() {
     app.use('/', limiterForRootEndpoint);
     app.set('trust proxy', 1);
 
-    app.get('/token', (req, res) => {
-        if (!mapboxToken) {
-            console.error('Mapbox token is not available');
-            return res.status(500).send('Mapbox token not available');
-        }
-        console.log('Mapbox token provided');
-        res.json({ token: mapboxToken });
-    });
+    let mapboxToken;
+    try {
+        mapboxToken = await retryApiCall(() => accessSecret('MAPBOX_API'));
+        console.log(mapboxToken)
+    } catch (error) {
+        console.error('Failed to access Mapbox token:', error);
+        process.exit(1); // Exit process if the token cannot be retrieved
+    }
 
     // Middleware setup
     const allowedOrigins = [
