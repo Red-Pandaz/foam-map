@@ -10,6 +10,7 @@ console.log(response)
         }
 
         const markers = await response.json();
+        console.log(markers)
         const groupedMarkers = {};
         markers.forEach(data => {
             const key = data.geoHashLocation; // Use geoHashLocation as the key
