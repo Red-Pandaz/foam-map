@@ -13,8 +13,9 @@ console.log(response)
         console.log(markers)
         const groupedMarkers = {};
         markers.forEach(data => {
-            console.log(key)
+           
             const key = data.geoHashLocation; // Use geoHashLocation as the key
+            console.log(key)
             if (!groupedMarkers[key]) {
                 // If the key doesn't exist, create a new entry with an empty array
                 groupedMarkers[key] = {
